@@ -52,6 +52,7 @@ class VerificarCedulaActivity : AppCompatActivity() {
             mostrarInicial()
         }
         verificarButton.setOnClickListener { verificarCedula() }
+        findViewById<Button>(R.id.buttonVolverVerificar).setOnClickListener { finish() }
         cedulaInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 verificarCedula()

@@ -73,5 +73,13 @@
                 android:text="@string/resultado_inicial"
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
         </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/buttonVolverVerificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="56dp"
+            android:text="← Volver al menú principal" />
     </LinearLayout>
 </ScrollView>

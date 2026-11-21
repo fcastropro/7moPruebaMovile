@@ -27,7 +27,10 @@ class ContactoAdapter(
         val contacto = contactos[position]
         holder.nombre.text = "${contacto.nombre} ${contacto.apellido}"
         holder.telefono.text = contacto.telefono.ifBlank { "Sin teléfono" }
-        holder.eliminar.setOnClickListener { alEliminar(contacto) }
+        holder.eliminar.setOnClickListener {
+            val posicion = holder.bindingAdapterPosition
+            if (posicion != RecyclerView.NO_POSITION) alEliminar(contactos[posicion])
+        }
     }
 
     override fun getItemCount(): Int = contactos.size
@@ -39,11 +42,11 @@ class ContactoAdapter(
     }
 
     fun quitar(codContacto: Int) {
-        val indice = contactos.indexOfFirst { it.codContacto == codContacto }
-        if (indice >= 0) {
-            contactos.removeAt(indice)
-            notifyItemRemoved(indice)
-        }
+        val quedaron = contactos.filterNot { it.codContacto == codContacto }
+        if (quedaron.size == contactos.size) return
+        contactos.clear()
+        contactos.addAll(quedaron)
+        notifyDataSetChanged()
     }
 
     fun estaVacio(): Boolean = contactos.isEmpty()

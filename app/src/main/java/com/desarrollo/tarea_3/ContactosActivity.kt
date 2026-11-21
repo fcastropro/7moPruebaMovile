@@ -1,5 +1,7 @@
 package com.desarrollo.tarea_3
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,7 +27,15 @@ class ContactosActivity : AppCompatActivity() {
     private val adaptador = ContactoAdapter(mutableListOf()) { confirmarEliminacion(it) }
     private lateinit var progreso: ProgressBar
     private lateinit var vacio: TextView
+    private lateinit var mensaje: TextView
     private var eliminando = false
+    private val crearContacto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
+        if (resultado.resultCode == RESULT_OK) {
+            val texto = resultado.data?.getStringExtra("mensaje") ?: "Contacto creado correctamente"
+            mostrarMensaje(texto, true)
+            aviso(texto)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +48,19 @@ class ContactosActivity : AppCompatActivity() {
         }
         progreso = findViewById(R.id.progressContactos)
         vacio = findViewById(R.id.textContactosVacio)
+        mensaje = findViewById(R.id.textMensajeContactos)
         findViewById<RecyclerView>(R.id.recyclerContactos).apply {
             layoutManager = LinearLayoutManager(this@ContactosActivity)
             adapter = adaptador
         }
+        findViewById<Button>(R.id.buttonCrearContacto).setOnClickListener {
+            crearContacto.launch(Intent(this, CrearContactoActivity::class.java))
+        }
         findViewById<Button>(R.id.buttonVolverContactos).setOnClickListener { finish() }
+    }
+
+    override fun onResume() {
+        super.onResume()
         cargarContactos()
     }
 
@@ -113,14 +132,20 @@ class ContactosActivity : AppCompatActivity() {
                 if (respuesta.optBoolean("estado", false)) {
                     adaptador.quitar(contacto.codContacto)
                     mostrarVacio()
-                    aviso(respuesta.optString("mensaje", "Contacto eliminado correctamente"))
+                    val texto = respuesta.optString("mensaje", "Contacto eliminado correctamente")
+                    mostrarMensaje(texto, true)
+                    aviso(texto)
                 } else {
-                    aviso(respuesta.optString("mensaje", "No se pudo eliminar el contacto"))
+                    val texto = respuesta.optString("mensaje", "No se pudo eliminar el contacto")
+                    mostrarMensaje(texto, false)
+                    aviso(texto)
                 }
             },
             { error ->
                 eliminando = false
-                aviso(mensajeError(error, "No se pudo eliminar el contacto."))
+                val texto = mensajeError(error, "No se pudo eliminar el contacto.")
+                mostrarMensaje(texto, false)
+                aviso(texto)
             }
         ).apply {
             setShouldCache(false)
@@ -155,8 +180,15 @@ class ContactosActivity : AppCompatActivity() {
         vacio.visibility = if (adaptador.estaVacio()) View.VISIBLE else View.GONE
     }
 
+    private fun mostrarMensaje(texto: String, correcto: Boolean) {
+        mensaje.text = texto
+        mensaje.setTextColor(Color.parseColor(if (correcto) "#166534" else "#9F1239"))
+        mensaje.setBackgroundColor(Color.parseColor(if (correcto) "#DCFCE7" else "#FFE4E6"))
+        mensaje.visibility = View.VISIBLE
+    }
+
     private fun aviso(mensaje: String) {
-        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, mensaje, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

@@ -18,9 +18,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
         android:text="Listado desde el servicio de Homestead."
         android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+    <Button
+        android:id="@+id/buttonCrearContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:minHeight="56dp"
+        android:text="Crear contacto" />
+
+    <TextView
+        android:id="@+id/textMensajeContactos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:padding="16dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/progressContactos"

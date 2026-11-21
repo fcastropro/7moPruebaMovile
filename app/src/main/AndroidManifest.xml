@@ -30,6 +30,10 @@
             android:name=".ContactosActivity"
             android:exported="false" />
         <activity
+            android:name=".CrearContactoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".VerificarCedulaActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
