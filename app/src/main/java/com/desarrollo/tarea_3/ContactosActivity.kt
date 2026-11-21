@@ -24,7 +24,7 @@ import org.json.JSONObject
 
 class ContactosActivity : AppCompatActivity() {
     private val cola by lazy { Volley.newRequestQueue(applicationContext) }
-    private val adaptador = ContactoAdapter(mutableListOf()) { confirmarEliminacion(it) }
+    private lateinit var adaptador: ContactoAdapter
     private lateinit var progreso: ProgressBar
     private lateinit var vacio: TextView
     private lateinit var mensaje: TextView
@@ -49,6 +49,7 @@ class ContactosActivity : AppCompatActivity() {
         progreso = findViewById(R.id.progressContactos)
         vacio = findViewById(R.id.textContactosVacio)
         mensaje = findViewById(R.id.textMensajeContactos)
+        adaptador = ContactoAdapter(mutableListOf(), cola) { confirmarEliminacion(it) }
         findViewById<RecyclerView>(R.id.recyclerContactos).apply {
             layoutManager = LinearLayoutManager(this@ContactosActivity)
             adapter = adaptador
@@ -91,7 +92,8 @@ class ContactosActivity : AppCompatActivity() {
                             codContacto = entero(objeto, "cod_contacto"),
                             nombre = objeto.optString("nom_contacto"),
                             apellido = objeto.optString("ape_contacto"),
-                            telefono = objeto.optString("telefono_contacto")
+                            telefono = objeto.optString("telefono_contacto"),
+                            foto = objeto.optString("foto_contacto").takeUnless { it == "null" }.orEmpty()
                         )
                     )
                 }

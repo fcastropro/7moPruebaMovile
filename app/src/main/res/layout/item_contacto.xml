@@ -15,12 +15,14 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageAvatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="Avatar del contacto"
-            android:src="@drawable/ic_avatar" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar"
+            app:shapeAppearanceOverlay="@style/FormaCircular" />
 
         <LinearLayout
             android:layout_width="0dp"

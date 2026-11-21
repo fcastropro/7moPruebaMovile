@@ -4,5 +4,6 @@ data class Contacto(
     val codContacto: Int,
     val nombre: String,
     val apellido: String,
-    val telefono: String
+    val telefono: String,
+    val foto: String = ""
 )

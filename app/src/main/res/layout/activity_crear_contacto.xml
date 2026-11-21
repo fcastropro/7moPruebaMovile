@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pantallaCrearContacto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,6 +26,25 @@
             android:layout_marginTop="8dp"
             android:text="El contacto se guarda en la base de datos."
             android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageVistaPrevia"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:contentDescription="Vista previa de la fotografía"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar"
+            app:shapeAppearanceOverlay="@style/FormaCircular" />
+
+        <Button
+            android:id="@+id/buttonSeleccionarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="56dp"
+            android:text="Seleccionar fotografía" />
 
         <TextView
             android:layout_width="match_parent"
