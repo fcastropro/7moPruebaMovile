@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pantallaRegistro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Pregunta 9 — Registro"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Valida la cédula, el correo y la contraseña en el dispositivo."
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Cédula"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextCedulaRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="10 dígitos"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:minHeight="56dp"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Correo electrónico"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextCorreoRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nombre@correo.com"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:minHeight="56dp"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Contraseña"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextClaveRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mínimo 8 caracteres"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/buttonValidarRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:minHeight="56dp"
+            android:text="Validar" />
+
+        <Button
+            android:id="@+id/buttonVolverRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="56dp"
+            android:text="← Volver al menú principal" />
+    </LinearLayout>
+</ScrollView>

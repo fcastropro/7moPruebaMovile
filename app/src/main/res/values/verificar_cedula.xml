@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="verificar_titulo">Verificar Cédula</string>
+    <string name="verificar_descripcion">Consulta si una cédula ya está registrada.</string>
+    <string name="cedula_etiqueta">Número de cédula</string>
+    <string name="cedula_hint">Escribe los 10 dígitos</string>
+    <string name="verificar_boton">Verificar</string>
+    <string name="resultado_inicial">Ingresa una cédula para consultar su disponibilidad.</string>
+    <string name="cedula_invalida">La cédula debe tener exactamente 10 dígitos.</string>
+    <string name="verificando">Verificando…</string>
+    <string name="cedula_registrada">La cédula %1$s ya está registrada.</string>
+    <string name="cedula_disponible">La cédula %1$s está disponible.</string>
+    <string name="error_red">No se pudo conectar con el servicio. Revisa tu conexión y que la API esté encendida; luego vuelve a intentar.</string>
+    <string name="error_servidor">El servicio no pudo completar la consulta. Vuelve a intentar.</string>
+    <string name="error_respuesta">El servicio envió una respuesta inválida. Vuelve a intentar.</string>
+    <string name="api_base_url" translatable="false">http://10.0.2.2:3000</string>
+    <string name="resultado_titulo_inicial">Consulta de registro</string>
+    <string name="resultado_titulo_registrada">Cédula registrada</string>
+    <string name="resultado_titulo_disponible">Cédula no encontrada</string>
+    <string name="resultado_titulo_error">No se pudo verificar</string>
+    <string name="resultado_titulo_validacion">Revisa la cédula</string>
+    <string name="resultado_datos">CÉDULA\n%1$s\n\nNOMBRE\n%2$s</string>
+    <string name="resultado_libre">CÉDULA\n%1$s\n\nLa cédula no fue encontrada.</string>
+    <string name="resultado_cargando">Estamos consultando el registro. Espera un momento.</string>
+</resources>
