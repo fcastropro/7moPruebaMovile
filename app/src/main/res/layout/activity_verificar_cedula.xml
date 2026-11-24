@@ -1,85 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pantallaVerificarCedula"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@color/fondo"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
+            style="@style/TextoTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/verificar_titulo"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textStyle="bold" />
+            android:text="@string/verificar_titulo" />
 
         <TextView
+            style="@style/TextoCuerpo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/verificar_descripcion"
-            android:textAppearance="?attr/textAppearanceBodyLarge" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/cedula_etiqueta"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editTextCedula"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="56dp"
-            android:hint="@string/cedula_hint"
-            android:inputType="number"
-            android:digits="0123456789"
-            android:importantForAutofill="no"
-            android:imeOptions="actionDone"
-            android:singleLine="true" />
-
-        <Button
-            android:id="@+id/buttonVerificar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:minHeight="56dp"
-            android:text="@string/verificar_boton" />
+            android:layout_marginTop="6dp"
+            android:text="@string/verificar_descripcion" />
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardResultado"
+            style="@style/Widget.Agenda.Tarjeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp">
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cedula_etiqueta"
+                    app:startIconDrawable="@drawable/ic_badge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextCedula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789"
+                        android:hint="@string/cedula_hint"
+                        android:imeOptions="actionDone"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:minHeight="56dp"
+                        android:singleLine="true"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/buttonVerificar"
+                    style="@style/Widget.Agenda.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/verificar_boton" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardResultado"
+            style="@style/Widget.Agenda.Tarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/textViewResultado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:accessibilityLiveRegion="polite"
-                android:padding="24dp"
                 android:lineSpacingExtra="6dp"
+                android:padding="20dp"
                 android:text="@string/resultado_inicial"
-                android:textAppearance="?attr/textAppearanceBodyLarge" />
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="@color/texto" />
         </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:id="@+id/buttonVolverVerificar"
+            style="@style/Widget.Agenda.Button.Texto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:minHeight="56dp"
-            android:text="← Volver al menú principal" />
+            android:layout_marginTop="8dp"
+            android:text="Volver al inicio" />
     </LinearLayout>
 </ScrollView>

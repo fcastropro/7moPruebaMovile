@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="violeta">#6654AD</color>
+    <color name="violeta_oscuro">#49358B</color>
+    <color name="lavanda">#EEEAF9</color>
+    <color name="fondo">#F8F7FC</color>
+    <color name="blanco_tarjeta">#FFFFFF</color>
+    <color name="texto">#23233B</color>
+    <color name="texto_secundario">#64748B</color>
+    <color name="borde">#D9D5E8</color>
+    <color name="exito">#15803D</color>
+    <color name="exito_fondo">#DCFCE7</color>
+    <color name="error">#BE123C</color>
+    <color name="error_suave">#FFF1F4</color>
+    <color name="sobre_violeta">#FFFFFF</color>
 </resources>

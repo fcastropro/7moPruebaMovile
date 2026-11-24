@@ -4,140 +4,164 @@
     android:id="@+id/pantallaCrearContacto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@color/fondo"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
 
         <TextView
+            style="@style/TextoTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Crear contacto"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textStyle="bold" />
+            android:text="Nuevo contacto" />
 
         <TextView
+            style="@style/TextoCuerpo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="El contacto se guarda en la base de datos."
-            android:textAppearance="?attr/textAppearanceBodyLarge" />
+            android:layout_marginTop="6dp"
+            android:text="Se guarda en tu agenda." />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageVistaPrevia"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:contentDescription="Vista previa de la fotografía"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_avatar"
-            app:shapeAppearanceOverlay="@style/FormaCircular" />
-
-        <Button
-            android:id="@+id/buttonSeleccionarFoto"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Agenda.Tarjeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:minHeight="56dp"
-            android:text="Seleccionar fotografía" />
+            android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Nombre"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-        <EditText
-            android:id="@+id/editTextNombreContacto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="56dp"
-            android:singleLine="true" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageVistaPrevia"
+                    android:layout_width="112dp"
+                    android:layout_height="112dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="Vista previa de la fotografía"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_avatar"
+                    app:shapeAppearanceOverlay="@style/FormaCircular"
+                    app:strokeColor="@color/borde"
+                    app:strokeWidth="2dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Apellido"
-            android:textStyle="bold" />
+                <Button
+                    android:id="@+id/buttonSeleccionarFoto"
+                    style="@style/Widget.Agenda.Button.Secundario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Seleccionar fotografía" />
 
-        <EditText
-            android:id="@+id/editTextApellidoContacto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Apellido"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="56dp"
-            android:singleLine="true" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Nombre"
+                    app:startIconDrawable="@drawable/ic_person">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Teléfono"
-            android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextNombreContacto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:minHeight="56dp"
+                        android:singleLine="true"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editTextTelefonoContacto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Teléfono"
-            android:importantForAutofill="no"
-            android:inputType="phone"
-            android:minHeight="56dp"
-            android:singleLine="true" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Apellido"
+                    app:startIconDrawable="@drawable/ic_person">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Correo"
-            android:textStyle="bold" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextApellidoContacto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:minHeight="56dp"
+                        android:singleLine="true"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editTextEmailContacto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="correo@ejemplo.com"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:minHeight="56dp"
-            android:singleLine="true" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Teléfono"
+                    app:startIconDrawable="@drawable/ic_phone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextTelefonoContacto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="phone"
+                        android:minHeight="56dp"
+                        android:singleLine="true"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Correo"
+                    app:startIconDrawable="@drawable/ic_mail">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmailContacto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        android:minHeight="56dp"
+                        android:singleLine="true"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textResultadoCrear"
+            style="@style/TextoAviso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:textStyle="bold"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/buttonGuardarContacto"
+            style="@style/Widget.Agenda.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:minHeight="56dp"
-            android:text="Guardar en la base" />
+            android:layout_marginTop="20dp"
+            android:text="Guardar" />
 
         <Button
             android:id="@+id/buttonVolverCrear"
+            style="@style/Widget.Agenda.Button.Texto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:minHeight="56dp"
-            android:text="← Volver a contactos" />
+            android:layout_marginTop="4dp"
+            android:text="Volver a contactos" />
     </LinearLayout>
 </ScrollView>

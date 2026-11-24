@@ -1,8 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.TAREA_3" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/violeta</item>
+        <item name="colorOnPrimary">@color/sobre_violeta</item>
+        <item name="colorPrimaryContainer">@color/lavanda</item>
+        <item name="colorOnPrimaryContainer">@color/violeta_oscuro</item>
+        <item name="colorSecondary">@color/violeta_oscuro</item>
+        <item name="colorOnSecondary">@color/sobre_violeta</item>
+        <item name="colorSurface">@color/blanco_tarjeta</item>
+        <item name="colorOnSurface">@color/texto</item>
+        <item name="colorOnSurfaceVariant">@color/texto_secundario</item>
+        <item name="colorOutline">@color/borde</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:colorBackground">@color/fondo</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="materialButtonStyle">@style/Widget.Agenda.Button</item>
+        <item name="textInputStyle">@style/Widget.Agenda.Campo</item>
     </style>
 
     <style name="Theme.TAREA_3" parent="Base.Theme.TAREA_3" />

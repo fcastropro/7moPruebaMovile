@@ -1,10 +1,8 @@
 package com.desarrollo.tarea_3
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -89,10 +87,7 @@ class RegistroActivity : AppCompatActivity() {
 
     private fun mostrar(texto: String, correcto: Boolean) {
         val resultado = findViewById<TextView>(R.id.textResultadoRegistro)
-        resultado.text = texto
-        resultado.setTextColor(Color.parseColor(if (correcto) "#166534" else "#9F1239"))
-        resultado.setBackgroundColor(Color.parseColor(if (correcto) "#DCFCE7" else "#FFE4E6"))
-        resultado.visibility = View.VISIBLE
+        resultado.pintarResultado(texto, correcto)
         Toast.makeText(applicationContext, texto, Toast.LENGTH_LONG).show()
     }
 

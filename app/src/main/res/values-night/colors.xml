@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="violeta">#C4B6F5</color>
+    <color name="violeta_oscuro">#E6DFFC</color>
+    <color name="lavanda">#2C2840</color>
+    <color name="fondo">#12111A</color>
+    <color name="blanco_tarjeta">#1C1A26</color>
+    <color name="texto">#F6F4FB</color>
+    <color name="texto_secundario">#C9C3D8</color>
+    <color name="borde">#3E3854</color>
+    <color name="error">#FECDD3</color>
+    <color name="error_suave">#3A2030</color>
+    <color name="sobre_violeta">#1B1430</color>
+</resources>

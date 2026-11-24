@@ -1,7 +1,6 @@
 package com.desarrollo.tarea_3
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -26,6 +25,7 @@ class ContactosActivity : AppCompatActivity() {
     private lateinit var progreso: ProgressBar
     private lateinit var vacio: TextView
     private lateinit var mensaje: TextView
+    private lateinit var contador: TextView
     private var eliminando = false
     private val crearContacto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
         if (resultado.resultCode == RESULT_OK) {
@@ -59,6 +59,7 @@ class ContactosActivity : AppCompatActivity() {
         progreso = findViewById(R.id.progressContactos)
         vacio = findViewById(R.id.textContactosVacio)
         mensaje = findViewById(R.id.textMensajeContactos)
+        contador = findViewById(R.id.textContadorContactos)
         adaptador = ContactoAdapter(mutableListOf(), cola, ::abrirEdicion, ::confirmarEliminacion)
         findViewById<RecyclerView>(R.id.recyclerContactos).apply {
             layoutManager = LinearLayoutManager(this@ContactosActivity)
@@ -185,14 +186,13 @@ class ContactosActivity : AppCompatActivity() {
     }
 
     private fun mostrarVacio() {
-        vacio.visibility = if (adaptador.estaVacio()) View.VISIBLE else View.GONE
+        val total = adaptador.itemCount
+        vacio.visibility = if (total == 0) View.VISIBLE else View.GONE
+        contador.text = if (total == 1) "1 contacto" else "$total contactos"
     }
 
     private fun mostrarMensaje(texto: String, correcto: Boolean) {
-        mensaje.text = texto
-        mensaje.setTextColor(Color.parseColor(if (correcto) "#166534" else "#9F1239"))
-        mensaje.setBackgroundColor(Color.parseColor(if (correcto) "#DCFCE7" else "#FFE4E6"))
-        mensaje.visibility = View.VISIBLE
+        mensaje.pintarResultado(texto, correcto)
     }
 
     private fun aviso(mensaje: String) {

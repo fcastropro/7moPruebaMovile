@@ -3,66 +3,90 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@color/fondo"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="24dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="28dp">
+
+        <ImageView
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_agenda" />
+
+        <TextView
+            style="@style/TextoMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Mi Agenda" />
+
+        <TextView
+            style="@style/TextoCuerpo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="Tus contactos, siempre organizados." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Fernando Castro"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="UNIANDES — Aplicaciones Móviles"
+            android:textColor="@color/violeta"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="UNIANDES — Aplicaciones Móviles"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-        <TextView
+            style="@style/TextoCuerpo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Agenda de contactos"
-            android:textAppearance="?attr/textAppearanceBodyLarge" />
+            android:gravity="center"
+            android:text="Fernando Castro" />
 
         <Button
             android:id="@+id/buttonIniciarSesion"
+            style="@style/Widget.Agenda.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:minHeight="56dp"
+            android:layout_marginTop="36dp"
             android:text="Iniciar sesión" />
 
         <Button
             android:id="@+id/buttonCrearCuenta"
+            style="@style/Widget.Agenda.Button.Secundario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:minHeight="56dp"
             android:text="Crear cuenta" />
 
         <Button
             android:id="@+id/buttonRecuperarClave"
+            style="@style/Widget.Agenda.Button.Secundario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:minHeight="56dp"
             android:text="Recuperar contraseña" />
 
         <Button
             android:id="@+id/buttonVerificarCedula"
+            style="@style/Widget.Agenda.Button.Texto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:minHeight="56dp"
-            android:text="Verificar Cédula — Actividad anterior" />
+            android:layout_marginTop="8dp"
+            android:text="Verificar cédula" />
     </LinearLayout>
 </ScrollView>

@@ -1,96 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pantallaRecuperar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@color/fondo"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="Seguridad de la cuenta"
+            android:src="@drawable/ic_lock" />
 
         <TextView
+            style="@style/TextoTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Recuperar contraseña"
-            android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textStyle="bold" />
+            android:layout_marginTop="12dp"
+            android:text="Recuperar contraseña" />
 
         <TextView
+            style="@style/TextoCuerpo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Confirma la cédula y el correo registrados. El cambio se hace en la aplicación, sin enviar un correo."
-            android:textAppearance="?attr/textAppearanceBodyLarge" />
+            android:layout_marginTop="6dp"
+            android:text="Confirma la cédula y el correo registrados. La nueva contraseña se guarda aquí, sin enviar un correo." />
 
-        <EditText
-            android:id="@+id/editTextCedulaRecuperar"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Agenda.Tarjeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="Cédula"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:maxLength="10"
-            android:minHeight="56dp" />
+            android:layout_marginTop="20dp">
 
-        <EditText
-            android:id="@+id/editTextCorreoRecuperar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Correo registrado"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:minHeight="56dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-        <EditText
-            android:id="@+id/editTextClaveRecuperar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Nueva contraseña"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="56dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cédula"
+                    app:startIconDrawable="@drawable/ic_badge">
 
-        <EditText
-            android:id="@+id/editTextConfirmarRecuperar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Confirmar nueva contraseña"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:minHeight="56dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextCedulaRecuperar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:minHeight="56dp"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Correo registrado"
+                    app:startIconDrawable="@drawable/ic_mail">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextCorreoRecuperar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        android:minHeight="56dp"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Nueva contraseña"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_lock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextClaveRecuperar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword"
+                        android:minHeight="56dp"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Agenda.Campo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Confirmar nueva contraseña"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_lock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextConfirmarRecuperar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword"
+                        android:minHeight="56dp"
+                        android:textColor="@color/texto" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textResultadoRecuperar"
+            style="@style/TextoAviso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:textStyle="bold"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/buttonRecuperar"
+            style="@style/Widget.Agenda.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:minHeight="56dp"
-            android:text="Cambiar contraseña" />
+            android:layout_marginTop="20dp"
+            android:text="Actualizar contraseña" />
 
         <Button
             android:id="@+id/buttonVolverRecuperar"
+            style="@style/Widget.Agenda.Button.Texto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:minHeight="56dp"
-            android:text="← Volver al inicio" />
+            android:layout_marginTop="4dp"
+            android:text="Volver" />
     </LinearLayout>
 </ScrollView>
