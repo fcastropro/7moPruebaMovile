@@ -30,24 +30,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Evaluación Primer Parcial"
+            android:text="Agenda de contactos"
             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
         <Button
-            android:id="@+id/buttonPregunta9"
+            android:id="@+id/buttonIniciarSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:minHeight="56dp"
-            android:text="Pregunta 9 — Registro" />
+            android:text="Iniciar sesión" />
 
         <Button
-            android:id="@+id/buttonPregunta10"
+            android:id="@+id/buttonCrearCuenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:minHeight="56dp"
-            android:text="Pregunta 10 — Contactos" />
+            android:text="Crear cuenta" />
+
+        <Button
+            android:id="@+id/buttonRecuperarClave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="56dp"
+            android:text="Recuperar contraseña" />
 
         <Button
             android:id="@+id/buttonVerificarCedula"

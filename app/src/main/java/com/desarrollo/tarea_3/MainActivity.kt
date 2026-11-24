@@ -18,11 +18,15 @@ class MainActivity : AppCompatActivity() {
             view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
             insets
         }
-        findViewById<Button>(R.id.buttonPregunta9).setOnClickListener {
+        findViewById<Button>(R.id.buttonIniciarSesion).setOnClickListener {
+            val destino = if (Sesion.leer(this) == null) LoginActivity::class.java else ContactosActivity::class.java
+            startActivity(Intent(this, destino))
+        }
+        findViewById<Button>(R.id.buttonCrearCuenta).setOnClickListener {
             startActivity(Intent(this, RegistroActivity::class.java))
         }
-        findViewById<Button>(R.id.buttonPregunta10).setOnClickListener {
-            startActivity(Intent(this, ContactosActivity::class.java))
+        findViewById<Button>(R.id.buttonRecuperarClave).setOnClickListener {
+            startActivity(Intent(this, RecuperarClaveActivity::class.java))
         }
         findViewById<Button>(R.id.buttonVerificarCedula).setOnClickListener {
             startActivity(Intent(this, VerificarCedulaActivity::class.java))

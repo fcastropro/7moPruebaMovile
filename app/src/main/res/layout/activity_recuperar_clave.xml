@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pantallaRecuperar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Recuperar contraseña"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Confirma la cédula y el correo registrados. El cambio se hace en la aplicación, sin enviar un correo."
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <EditText
+            android:id="@+id/editTextCedulaRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="Cédula"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="10"
+            android:minHeight="56dp" />
+
+        <EditText
+            android:id="@+id/editTextCorreoRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Correo registrado"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:minHeight="56dp" />
+
+        <EditText
+            android:id="@+id/editTextClaveRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Nueva contraseña"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp" />
+
+        <EditText
+            android:id="@+id/editTextConfirmarRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Confirmar nueva contraseña"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="56dp" />
+
+        <TextView
+            android:id="@+id/textResultadoRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/buttonRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:minHeight="56dp"
+            android:text="Cambiar contraseña" />
+
+        <Button
+            android:id="@+id/buttonVolverRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="56dp"
+            android:text="← Volver al inicio" />
+    </LinearLayout>
+</ScrollView>

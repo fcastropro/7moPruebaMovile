@@ -46,11 +46,26 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonEliminarContacto"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Eliminar" />
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonEditarContacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="96dp"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/buttonEliminarContacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minWidth="96dp"
+                android:text="Eliminar" />
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Pregunta 10 — Contactos"
+            android:text="Mis contactos"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
         android:textStyle="bold" />
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Listado desde el servicio de Homestead."
+            android:text="Solo se muestran los contactos de tu cuenta."
         android:textAppearance="?attr/textAppearanceBodyLarge" />
 
     <Button
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="24dp"
-        android:text="No hay contactos."
+            android:text="No hay contactos registrados."
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -64,10 +64,10 @@
         android:clipToPadding="false" />
 
     <Button
-        android:id="@+id/buttonVolverContactos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:minHeight="56dp"
-        android:text="← Volver al menú principal" />
+            android:id="@+id/buttonCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="56dp"
+            android:text="Cerrar sesión" />
 </LinearLayout>

@@ -16,9 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
@@ -36,9 +34,21 @@ class ContactosActivity : AppCompatActivity() {
             aviso(texto)
         }
     }
+    private val editarContacto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultado ->
+        if (resultado.resultCode == RESULT_OK) {
+            val texto = resultado.data?.getStringExtra("mensaje") ?: "Contacto actualizado correctamente"
+            mostrarMensaje(texto, true)
+            aviso(texto)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Sesion.leer(this) == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
         enableEdgeToEdge()
         setContentView(R.layout.activity_contactos)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.pantallaContactos)) { view, insets ->
@@ -49,7 +59,7 @@ class ContactosActivity : AppCompatActivity() {
         progreso = findViewById(R.id.progressContactos)
         vacio = findViewById(R.id.textContactosVacio)
         mensaje = findViewById(R.id.textMensajeContactos)
-        adaptador = ContactoAdapter(mutableListOf(), cola) { confirmarEliminacion(it) }
+        adaptador = ContactoAdapter(mutableListOf(), cola, ::abrirEdicion, ::confirmarEliminacion)
         findViewById<RecyclerView>(R.id.recyclerContactos).apply {
             layoutManager = LinearLayoutManager(this@ContactosActivity)
             adapter = adaptador
@@ -57,59 +67,65 @@ class ContactosActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonCrearContacto).setOnClickListener {
             crearContacto.launch(Intent(this, CrearContactoActivity::class.java))
         }
-        findViewById<Button>(R.id.buttonVolverContactos).setOnClickListener { finish() }
+        findViewById<Button>(R.id.buttonCerrarSesion).setOnClickListener { cerrarSesion() }
     }
 
     override fun onResume() {
         super.onResume()
+        if (Sesion.leer(this) == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
         cargarContactos()
     }
 
     private fun cargarContactos() {
         progreso.visibility = View.VISIBLE
-        val peticion = JsonObjectRequest(
-            Request.Method.GET,
-            URL_LISTAR,
-            null,
-            { respuesta ->
-                progreso.visibility = View.GONE
-                if (!respuesta.optBoolean("estado", false)) {
-                    aviso(respuesta.optString("mensaje", "No se pudieron consultar los contactos"))
-                    mostrarVacio()
-                    return@JsonObjectRequest
-                }
-                val arreglo = respuesta.optJSONArray("contactos")
-                if (arreglo == null) {
-                    aviso("El servicio envió una respuesta inválida.")
-                    mostrarVacio()
-                    return@JsonObjectRequest
-                }
-                val lista = mutableListOf<Contacto>()
-                for (i in 0 until arreglo.length()) {
-                    val objeto = arreglo.optJSONObject(i) ?: continue
-                    lista.add(
-                        Contacto(
-                            codContacto = entero(objeto, "cod_contacto"),
-                            nombre = objeto.optString("nom_contacto"),
-                            apellido = objeto.optString("ape_contacto"),
-                            telefono = objeto.optString("telefono_contacto"),
-                            foto = objeto.optString("foto_contacto").takeUnless { it == "null" }.orEmpty()
-                        )
-                    )
-                }
-                adaptador.reemplazar(lista)
+        Red.json(this, cola, Request.Method.GET, "listar.php", null, { respuesta ->
+            progreso.visibility = View.GONE
+            val arreglo = respuesta.optJSONArray("contactos")
+            if (!respuesta.optBoolean("estado", false) || arreglo == null) {
+                aviso(respuesta.optString("mensaje", "No se pudieron consultar los contactos"))
                 mostrarVacio()
-            },
-            { error ->
-                progreso.visibility = View.GONE
-                aviso(mensajeError(error, "No se pudo cargar la lista de contactos."))
+            } else {
+            val lista = mutableListOf<Contacto>()
+            for (i in 0 until arreglo.length()) {
+                val objeto = arreglo.optJSONObject(i) ?: continue
+                lista.add(
+                    Contacto(
+                        codContacto = entero(objeto, "cod_contacto"),
+                        nombre = objeto.optString("nom_contacto"),
+                        apellido = objeto.optString("ape_contacto"),
+                        telefono = objeto.optString("telefono_contacto"),
+                        correo = objeto.optString("email_contacto").takeUnless { it == "null" }.orEmpty(),
+                        foto = objeto.optString("foto_contacto").takeUnless { it == "null" }.orEmpty()
+                    )
+                )
+            }
+            adaptador.reemplazar(lista)
+            mostrarVacio()
+            }
+        }, {
+            progreso.visibility = View.GONE
+            if (it.contains("sesión", ignoreCase = true)) {
+                irAlLogin()
+            } else {
+                aviso(it)
                 mostrarVacio()
             }
-        ).apply {
-            setShouldCache(false)
-            retryPolicy = DefaultRetryPolicy(8000, 0, 1f)
-        }
-        cola.add(peticion)
+        })
+    }
+
+    private fun abrirEdicion(contacto: Contacto) {
+        editarContacto.launch(
+            Intent(this, EditarContactoActivity::class.java)
+                .putExtra("cod_contacto", contacto.codContacto)
+                .putExtra("nombre", contacto.nombre)
+                .putExtra("apellido", contacto.apellido)
+                .putExtra("telefono", contacto.telefono)
+                .putExtra("correo", contacto.correo)
+        )
     }
 
     private fun confirmarEliminacion(contacto: Contacto) {
@@ -125,35 +141,38 @@ class ContactosActivity : AppCompatActivity() {
     private fun eliminar(contacto: Contacto) {
         eliminando = true
         val cuerpo = JSONObject().put("cod_contacto", contacto.codContacto)
-        val peticion = JsonObjectRequest(
-            Request.Method.POST,
-            URL_ELIMINAR,
-            cuerpo,
-            { respuesta ->
-                eliminando = false
-                if (respuesta.optBoolean("estado", false)) {
-                    adaptador.quitar(contacto.codContacto)
-                    mostrarVacio()
-                    val texto = respuesta.optString("mensaje", "Contacto eliminado correctamente")
-                    mostrarMensaje(texto, true)
-                    aviso(texto)
-                } else {
-                    val texto = respuesta.optString("mensaje", "No se pudo eliminar el contacto")
-                    mostrarMensaje(texto, false)
-                    aviso(texto)
-                }
-            },
-            { error ->
-                eliminando = false
-                val texto = mensajeError(error, "No se pudo eliminar el contacto.")
+        Red.json(this, cola, Request.Method.POST, "eliminar.php", cuerpo, { respuesta ->
+            eliminando = false
+            if (respuesta.optBoolean("estado", false)) {
+                adaptador.quitar(contacto.codContacto)
+                mostrarVacio()
+                val texto = respuesta.optString("mensaje", "Contacto eliminado correctamente")
+                mostrarMensaje(texto, true)
+                aviso(texto)
+            } else {
+                val texto = respuesta.optString("mensaje", "No se pudo eliminar el contacto")
                 mostrarMensaje(texto, false)
                 aviso(texto)
             }
-        ).apply {
-            setShouldCache(false)
-            retryPolicy = DefaultRetryPolicy(8000, 0, 1f)
-        }
-        cola.add(peticion)
+        }, {
+            eliminando = false
+            mostrarMensaje(it, false)
+            aviso(it)
+        })
+    }
+
+    private fun cerrarSesion() {
+        Red.json(this, cola, Request.Method.POST, "cerrar.php", JSONObject(), {
+            irAlLogin()
+        }, {
+            irAlLogin()
+        })
+    }
+
+    private fun irAlLogin() {
+        Sesion.cerrar(this)
+        startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        finish()
     }
 
     private fun entero(objeto: JSONObject, clave: String): Int {
@@ -162,19 +181,6 @@ class ContactosActivity : AppCompatActivity() {
             is Number -> valor.toInt()
             is String -> valor.toIntOrNull() ?: 0
             else -> 0
-        }
-    }
-
-    private fun mensajeError(error: com.android.volley.VolleyError, respaldo: String): String {
-        val cuerpo = error.networkResponse?.data?.let { String(it, Charsets.UTF_8) }
-        if (!cuerpo.isNullOrBlank()) {
-            val mensaje = runCatching { JSONObject(cuerpo).optString("mensaje") }.getOrNull()
-            if (!mensaje.isNullOrBlank()) return mensaje
-        }
-        return if (error.networkResponse == null) {
-            "No se pudo conectar con el servicio."
-        } else {
-            respaldo
         }
     }
 
@@ -196,10 +202,5 @@ class ContactosActivity : AppCompatActivity() {
     override fun onDestroy() {
         cola.stop()
         super.onDestroy()
-    }
-
-    companion object {
-        private const val URL_LISTAR = "http://192.168.56.56:8088/listar.php"
-        private const val URL_ELIMINAR = "http://192.168.56.56:8088/eliminar.php"
     }
 }

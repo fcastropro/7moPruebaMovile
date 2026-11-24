@@ -38,6 +38,11 @@ class CrearContactoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Sesion.leer(this) == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
         enableEdgeToEdge()
         setContentView(R.layout.activity_crear_contacto)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.pantallaCrearContacto)) { view, insets ->
@@ -126,6 +131,7 @@ class CrearContactoActivity : AppCompatActivity() {
                 mostrar(texto, false)
             }
         ) {
+            override fun getHeaders(): MutableMap<String, String> = Red.encabezados(this@CrearContactoActivity)
             override fun getBodyContentType(): String = "application/json; charset=utf-8"
             override fun getBody(): ByteArray = cuerpo.toString().toByteArray(Charsets.UTF_8)
         }.apply {
@@ -153,6 +159,10 @@ class CrearContactoActivity : AppCompatActivity() {
                     readTimeout = 15000
                     setRequestProperty("Content-Type", "multipart/form-data; boundary=$limite")
                     setRequestProperty("Connection", "close")
+                    Sesion.leer(this@CrearContactoActivity)?.let {
+                        setRequestProperty("Authorization", "Bearer $it")
+                        setRequestProperty("X-Sesion", it)
+                    }
                 }
                 conexion.outputStream.use { it.write(cuerpo) }
                 val codigo = conexion.responseCode

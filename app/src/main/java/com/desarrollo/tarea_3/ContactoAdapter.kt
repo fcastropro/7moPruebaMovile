@@ -15,6 +15,7 @@ import com.google.android.material.imageview.ShapeableImageView
 class ContactoAdapter(
     private val contactos: MutableList<Contacto>,
     private val cola: RequestQueue,
+    private val alEditar: (Contacto) -> Unit,
     private val alEliminar: (Contacto) -> Unit
 ) : RecyclerView.Adapter<ContactoAdapter.Holder>() {
 
@@ -22,6 +23,7 @@ class ContactoAdapter(
         val avatar: ShapeableImageView = itemView.findViewById(R.id.imageAvatar)
         val nombre: TextView = itemView.findViewById(R.id.textNombreContacto)
         val telefono: TextView = itemView.findViewById(R.id.textTelefonoContacto)
+        val editar: Button = itemView.findViewById(R.id.buttonEditarContacto)
         val eliminar: Button = itemView.findViewById(R.id.buttonEliminarContacto)
     }
 
@@ -35,6 +37,10 @@ class ContactoAdapter(
         holder.nombre.text = "${contacto.nombre} ${contacto.apellido}"
         holder.telefono.text = contacto.telefono.ifBlank { "Sin teléfono" }
         mostrarFoto(holder, contacto.foto)
+        holder.editar.setOnClickListener {
+            val posicion = holder.bindingAdapterPosition
+            if (posicion != RecyclerView.NO_POSITION) alEditar(contactos[posicion])
+        }
         holder.eliminar.setOnClickListener {
             val posicion = holder.bindingAdapterPosition
             if (posicion != RecyclerView.NO_POSITION) alEliminar(contactos[posicion])
